@@ -14,9 +14,13 @@ Now, this plugin only one command
 `/shout <Message>`
 
 > description: Shout one sentence on server chatroom
+>
 > usage: §4/shout <message>
+>
 > permission: MessageBox.allPlayer
+>
 > permission-message: §cYou don't have the permission -> §6[MessageBox.allPlayer]
+>
 > —— plugin.yml
 
 This is the command use
