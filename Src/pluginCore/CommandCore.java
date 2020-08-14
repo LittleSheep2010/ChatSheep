@@ -13,22 +13,34 @@ import org.bukkit.util.StringUtil;
 import java.util.List;
 
 public class CommandCore implements CommandExecutor {
+
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String playerName = sender.getName();
+        Player senderPlayer = (Player) sender;
 
         if( command.getName().equalsIgnoreCase("shout") ) {
             String shoutMessage = StringUtils.join(args, ' ', 0, args.length);
 
             if( shoutMessage == null ) { return false; }
 
-            Bukkit.broadcastMessage("§6[SHOUT]§b(" + playerName  + ") -> §8§l" + shoutMessage);
+            String titleMsg = "§8§l" + shoutMessage;
+            String titleName = null;
+            if(senderPlayer.isOp() == true) {
+                titleName = "§b" + playerName + " | Lv." +  senderPlayer.getLevel() + " | Admin";
+                Bukkit.broadcastMessage("§6[SHOUT]§b(" + playerName  + " | Lv." + senderPlayer.getLevel()
+                        + " | Admin) -> §8§l" + shoutMessage);
+            } else {
+                titleName = "§b" + playerName + " | Lv." +  senderPlayer.getLevel();
+                Bukkit.broadcastMessage("§6[SHOUT]§b(" + playerName  + " | Lv." + senderPlayer.getLevel()
+                        + ") -> §8§l" + shoutMessage);
+            }
+
+
+            for( Player onlinePlayers : Bukkit.getOnlinePlayers() ) {
+                onlinePlayers.sendTitle(null, titleMsg);
+            }
+
             return true;
-        }
-
-        if( command.getName().equalsIgnoreCase("loudly") ) {
-            String loudlyMessage = StringUtils.join(args, ' ', 0, args.length);
-
-            if( loudlyMessage == null ) { return false; }
         }
 
         return false;

@@ -1,14 +1,17 @@
 package pluginCore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.*;
+
+import java.util.List;
 
 public class MainClass extends JavaPlugin {
+
+    public static FileConfiguration configurations;
 
     @Override
     public void onDisable() {
@@ -31,13 +34,11 @@ public class MainClass extends JavaPlugin {
 
         Bukkit.getPluginCommand("shout").setExecutor( new CommandCore() );
         Bukkit.getPluginCommand("shout").setTabCompleter( new TabCompleter() );
-
-        // Bukkit.getPluginManager().registerEvent( new EntityDamageByEntityEvent(), new EventProcessing() );
-
         Bukkit.getPluginManager().registerEvents( new EventProcessing(), this );
+        saveDefaultConfig();
+    }
 
-        // getServer().dispatchCommand(getServer().getConsoleSender(), "scoreboard objectives add HealthBar health");
-        // getServer().dispatchCommand(getServer().getConsoleSender(), "scoreboard objectives setdisplay list HealthBar");
+    public static void sendConsoleInfo(String info) {
+        Bukkit.getLogger().info(info);
     }
 }
-
