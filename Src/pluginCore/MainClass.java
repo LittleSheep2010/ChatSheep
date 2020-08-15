@@ -2,12 +2,7 @@ package pluginCore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.*;
-
-import java.util.List;
 
 public class MainClass extends JavaPlugin {
 
@@ -26,8 +21,6 @@ public class MainClass extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("[JavaSheep]:[PluginCore] Start ChatSheep...");
-        getLogger().info("[JavaSheep]:[PluginCore] *** PluginCore -> ChatSheep ***");
         getLogger().info("[JavaSheep]:[ChatSheep] Version 1.0.2");
         getLogger().info("[JavaSheep]:[ChatSheep] Welcome using Sheep family made a new spigot Plugin!");
         getLogger().info("[JavaSheep]:[ChatSheep] ChatSheep is Enable");
@@ -36,6 +29,8 @@ public class MainClass extends JavaPlugin {
         Bukkit.getPluginCommand("shout").setTabCompleter( new TabCompleter() );
         Bukkit.getPluginManager().registerEvents( new EventProcessing(), this );
         saveDefaultConfig();
+
+        RecipeProcessing.recipeManager();
     }
 
     public static void sendConsoleInfo(String info) {

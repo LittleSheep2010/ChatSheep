@@ -26,18 +26,18 @@ public class CommandCore implements CommandExecutor {
             String titleMsg = "§8§l" + shoutMessage;
             String titleName = null;
             if(senderPlayer.isOp() == true) {
-                titleName = "§b" + playerName + " | Lv." +  senderPlayer.getLevel() + " | Admin";
+                titleName = "§b[ " + playerName + " - Admin ]";
                 Bukkit.broadcastMessage("§6[SHOUT]§b(" + playerName  + " | Lv." + senderPlayer.getLevel()
                         + " | Admin) -> §8§l" + shoutMessage);
             } else {
-                titleName = "§b" + playerName + " | Lv." +  senderPlayer.getLevel();
+                titleName = "§b[ " + playerName + " ]";
                 Bukkit.broadcastMessage("§6[SHOUT]§b(" + playerName  + " | Lv." + senderPlayer.getLevel()
                         + ") -> §8§l" + shoutMessage);
             }
 
 
             for( Player onlinePlayers : Bukkit.getOnlinePlayers() ) {
-                onlinePlayers.sendTitle(null, titleMsg);
+                onlinePlayers.sendTitle(titleName, titleMsg);
             }
 
             return true;
